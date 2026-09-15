@@ -15,7 +15,7 @@ export async function GET(request) {
   const supabase = getServiceSupabase()
   let query = supabase
     .from('notices')
-    .select('*, members!created_by(owner_name)')
+    .select('*, members!created_by(owner_name), notice_attachments(*)')
     .order('created_at', { ascending: false })
 
   if (type) {
@@ -39,10 +39,10 @@ export async function POST(request) {
   }
 
   try {
-    const { title, content, notice_type } = await request.json()
+    const { title, content, notice_type, attachments } = await request.json()
 
-    if (!title || !content || !notice_type) {
-      return NextResponse.json({ error: 'Title, content, and type are required' }, { status: 400 })
+    if (!title || !notice_type) {
+      return NextResponse.json({ error: 'Title and type are required' }, { status: 400 })
     }
 
     const supabase = getServiceSupabase()
@@ -50,7 +50,7 @@ export async function POST(request) {
       .from('notices')
       .insert({
         title,
-        content,
+        content: content || null,
         notice_type,
         created_by: session.member.id,
       })
@@ -59,6 +59,19 @@ export async function POST(request) {
 
     if (error) {
       return NextResponse.json({ error: 'Failed to create notice' }, { status: 500 })
+    }
+
+    // Insert attachments if any
+    if (attachments && attachments.length > 0) {
+      const attachmentRows = attachments.map(att => ({
+        notice_id: notice.id,
+        file_url: att.file_url,
+        file_name: att.file_name,
+        file_type: att.file_type,
+        file_size: att.file_size,
+      }))
+
+      await supabase.from('notice_attachments').insert(attachmentRows)
     }
 
     return NextResponse.json({ notice }, { status: 201 })
