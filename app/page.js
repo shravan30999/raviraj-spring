@@ -23,37 +23,28 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <PublicNavbar />
 
-      {/* Hero Section */}
-      <section className="relative">
-        <div className="relative h-[500px] md:h-[600px] overflow-hidden">
-          <img src="/hero.jpg" alt="Raviraj Spring Society"
-            className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-          <div className="absolute inset-0 flex items-end">
-            <div className="max-w-6xl mx-auto px-4 pb-12 md:pb-16 w-full">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
-                Raviraj Spring
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-200 mb-6">
-                Housing Society Portal
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link href="/login"
-                  className="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all">
-                  Member Login
-                </Link>
-                <Link href="/committee"
-                  className="bg-white/20 backdrop-blur text-white border border-white/30 px-6 py-3 rounded-lg font-semibold hover:bg-white/30 transition-all">
-                  Managing Committee
-                </Link>
-              </div>
-            </div>
+      {/* Logo + Welcome */}
+      <section className="py-10 md:py-14 bg-white">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <img src="/logo.png" alt="Raviraj Spring" className="h-24 md:h-32 mx-auto mb-4" />
+          <p className="text-lg md:text-xl text-gray-600">
+            Housing Society Portal
+          </p>
+        </div>
+      </section>
+
+      {/* Building Images — prominent */}
+      <section className="bg-gray-50 py-10 md:py-14">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <img src="/gate.jpg" alt="Raviraj Spring Entrance" className="rounded-xl shadow-sm w-full h-72 md:h-80 object-cover" />
+            <img src="/building.jpg" alt="Raviraj Spring Building" className="rounded-xl shadow-sm w-full h-72 md:h-80 object-cover" />
           </div>
         </div>
       </section>
 
       {/* Quick Links */}
-      <section className="py-12 md:py-16 bg-gray-50">
+      <section className="py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Link href="/guidelines" className="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-all group">
@@ -94,7 +85,7 @@ export default function Home() {
 
       {/* Recent Notices Ticker */}
       {notices.length > 0 && (
-        <section className="py-10 md:py-14">
+        <section className="py-10 md:py-14 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Recent Notices</h2>
             <div className="space-y-3">
@@ -121,22 +112,12 @@ export default function Home() {
         </section>
       )}
 
-      {/* Building Images */}
-      <section className="py-10 md:py-14 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <img src="/gate.jpg" alt="Raviraj Spring Entrance" className="rounded-xl shadow-sm w-full h-64 object-cover" />
-            <img src="/building.jpg" alt="Raviraj Spring Building" className="rounded-xl shadow-sm w-full h-64 object-cover" />
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="bg-primary text-white py-10">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="font-bold text-lg mb-3">Raviraj Spring</h3>
+              <img src="/logo.png" alt="Raviraj Spring" className="h-14 mb-3 brightness-0 invert" />
               <p className="text-blue-200 text-sm leading-relaxed">
                 Housing Society Portal for residents of Raviraj Spring, Mira Road East.
               </p>
